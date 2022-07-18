@@ -5,9 +5,14 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 export default {
   setup () {
+    const uName = ref("Diego"); //better store the ref() in a vanilla JS variable. Don't use this keyword.
 
+    return {
+      userName: uName
+    };
   } //the setup method replaces the Data, Methods, Watch and computed all together. The other are untouched.
   // data() {
   //   return {
