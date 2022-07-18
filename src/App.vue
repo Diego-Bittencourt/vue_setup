@@ -9,6 +9,11 @@ import { ref } from 'vue';
 export default {
   setup () {
     const uName = ref("Diego"); //better store the ref() in a vanilla JS variable. Don't use this keyword.
+                                //ref() creates an object.
+
+    setTimeout(function () {
+      uName.value = "Didi";
+    }, 2000)
 
     return {
       userName: uName
