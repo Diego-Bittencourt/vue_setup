@@ -2,6 +2,7 @@
   <section class="container">
     <h2>{{ userName }}</h2>
     <h2>{{ user.age }}</h2>
+    <h2>uAge: {{ uAge}}</h2>
     <h2>{{ user }}</h2>
     <button @click="setAge">Change Age</button>
     <div>
@@ -12,7 +13,7 @@
 </template>
 
 <script>
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, watch } from 'vue';
 
 // import { isReactive, isRef } from 'vue'; 
 // the isReactive and isRef are helpers to check is a value is reactive or not. it's a function that return true or false.
@@ -25,10 +26,18 @@ export default {
   setup () {
     const firstName = ref('');
     const lastName = ref('');
+    const uAge = ref(36);
 
    const uName =  computed(function () {
       return firstName.value + ' ' + lastName.value;
     });
+
+     watch([uAge, uName], function(newValues, oldValues) {
+        console.log("Old age: " + oldValues[0]);
+        console.log("New age: " + newValues[0]);
+        console.log("Old name: " + oldValues[1]);
+        console.log("New name: " + newValues[1]);
+    })
 
 
   // function setFirstName(event) {
@@ -49,6 +58,7 @@ export default {
 
       function setNewAge() {
         user.age++;
+        uAge.value++;
       } // to expose functions, just create a function in the setup and expose it in the return.
 
 
@@ -57,7 +67,8 @@ export default {
       setAge: setNewAge,
       firstName,
       lastName,
-      userName: uName
+      userName: uName,
+      uAge
     };// the ref() and reactive() objective are reactive, that means they change when data is changed.
       // in the other hand, the value inside them are not reactive. So it's important to return the object, no the
       //value inside them.
