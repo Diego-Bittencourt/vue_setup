@@ -3,6 +3,7 @@
     <h2>{{ user.name }}</h2>
     <h2>{{ user.age }}</h2>
     <h2>{{ user }}</h2>
+    <button @click="setAge">Change Age</button>
   </section>
 </template>
 
@@ -24,19 +25,16 @@ export default {
     const user = reactive({
       name: "Diego",
       age: 36
-    }); 
+    }); //reactive is specialized to work with objects. refs is for any data, including object.
 
-    //reactive is specialized to work with objects. refs is for any data, including object.
+      function setNewAge() {
+        user.age++;
+      }
 
-    setTimeout(function () {
-      // uName.value = "Didi";
-      // uAge.value = 26;
-      user.name = 'Didi';
-      user.age = 26;
-    }, 2000)
 
-    return {
-      user: user
+      return {
+      user: user,
+      setAge: setNewAge
     };// the ref() and reactive() objective are reactive, that means they change when data is changed.
       // in the other hand, the value inside them are not reactive. So it's important to return the object, no the
       //value inside them.
