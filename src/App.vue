@@ -7,32 +7,39 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { reactive } from 'vue';
+// import { isReactive, isRef } from 'vue'; 
+// the isReactive and isRef are helpers to check is a value is reactive or not. it's a function that return true or false.
+
+// import { toRefs } from 'vue';
+//the toRefs function receives an object as parameters, any object (including the one in reactive()) and turns all the properties
+//inside of it to refs, so it will be reactive.
+// using that, I can expose uName.value in return and they'll be reactive.
 export default {
   setup () {
     // const uName = ref("Diego"); //better store the ref() in a vanilla JS variable. Don't use this keyword.
     //                             //ref() creates an object.
     // const uAge = ref(36);
 
-    const user = ref({
+    const user = reactive({
       name: "Diego",
       age: 36
-    });
+    }); 
 
-    console.log(user);
+    //reactive is specialized to work with objects. refs is for any data, including object.
 
     setTimeout(function () {
       // uName.value = "Didi";
       // uAge.value = 26;
-      user.value.name = 'Didi';
-      user.value.age = 26;
+      user.name = 'Didi';
+      user.age = 26;
     }, 2000)
 
     return {
-      userName: user.value.name,
-      age: user.value.age,
       user: user
-    };
+    };// the ref() and reactive() objective are reactive, that means they change when data is changed.
+      // in the other hand, the value inside them are not reactive. So it's important to return the object, no the
+      //value inside them.
   } //the setup method replaces the Data, Methods, Watch and computed all together. The other are untouched.
   // data() {
   //   return {
