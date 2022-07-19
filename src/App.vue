@@ -5,8 +5,8 @@
     <h2>{{ user }}</h2>
     <button @click="setAge">Change Age</button>
     <div>
-      <input type="text" placeholder="first name" @input="setFirstName"/>
-      <input type="text" placeholder="last name" @input="setLastName"/>
+      <input type="text" placeholder="first name" v-model="firstName"/>
+      <input type="text" placeholder="last name" v-model="lastName"/>
     </div>
   </section>
 </template>
@@ -31,13 +31,13 @@ export default {
     });
 
 
-  function setFirstName(event) {
-    firstName.value = event.target.value;
-  }
+  // function setFirstName(event) {
+  //   firstName.value = event.target.value;
+  // }
 
-  function setLastName(event) {
-    lastName.value = event.target.value
-  }
+  // function setLastName(event) {
+  //   lastName.value = event.target.value
+  // }
     // const uName = ref("Diego"); //better store the ref() in a vanilla JS variable. Don't use this keyword.
     //                             //ref() creates an object.
     // const uAge = ref(36);
@@ -55,8 +55,8 @@ export default {
       return {
       user: user,
       setAge: setNewAge,
-      setFirstName,
-      setLastName,
+      firstName,
+      lastName,
       userName: uName
     };// the ref() and reactive() objective are reactive, that means they change when data is changed.
       // in the other hand, the value inside them are not reactive. So it's important to return the object, no the
