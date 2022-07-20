@@ -1,5 +1,9 @@
 <template>
   <section class="container">
+    <user-data
+    :firstName="firstName"
+    :last-name="lastName"
+    :age="uAge"></user-data>
     <h2>{{ userName }}</h2>
     <h2>{{ user.age }}</h2>
     <h2>uAge: {{ uAge}}</h2>
@@ -10,11 +14,13 @@
       <input type="text" placeholder="last name" ref="lastNameInput"/>
       <button @click="setLastName">Set Last Name</button>
     </div>
+
   </section>
 </template>
 
 <script>
 import { reactive, ref, computed, watch } from 'vue';
+import UserData from './components/UserData.vue';
 
 // import { isReactive, isRef } from 'vue'; 
 // the isReactive and isRef are helpers to check is a value is reactive or not. it's a function that return true or false.
@@ -24,6 +30,9 @@ import { reactive, ref, computed, watch } from 'vue';
 //inside of it to refs, so it will be reactive.
 // using that, I can expose uName.value in return and they'll be reactive.
 export default {
+  components: {
+    UserData
+  },
   setup () {
     const firstName = ref('');
     const lastName = ref('');
