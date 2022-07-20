@@ -7,7 +7,8 @@
     <button @click="setAge">Change Age</button>
     <div>
       <input type="text" placeholder="first name" v-model="firstName"/>
-      <input type="text" placeholder="last name" v-model="lastName"/>
+      <input type="text" placeholder="last name" ref="lastNameInput"/>
+      <button @click="setLastName">Set Last Name</button>
     </div>
   </section>
 </template>
@@ -26,11 +27,17 @@ export default {
   setup () {
     const firstName = ref('');
     const lastName = ref('');
+    const lastNameInput = ref(null);
     const uAge = ref(36);
 
    const uName =  computed(function () {
       return firstName.value + ' ' + lastName.value;
     });
+
+  function setLastName() {
+    lastName.value = lastNameInput.value.value;
+  }
+
 
      watch([uAge, uName], function(newValues, oldValues) {
         console.log("Old age: " + oldValues[0]);
@@ -68,7 +75,9 @@ export default {
       firstName,
       lastName,
       userName: uName,
-      uAge
+      uAge,
+      setLastName,
+      lastNameInput
     };// the ref() and reactive() objective are reactive, that means they change when data is changed.
       // in the other hand, the value inside them are not reactive. So it's important to return the object, no the
       //value inside them.
