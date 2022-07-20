@@ -3,7 +3,7 @@
     <user-data
     :firstName="firstName"
     :last-name="lastName"
-    :age="uAge"></user-data>
+    ></user-data>
     <h2>{{ userName }}</h2>
     <h2>{{ user.age }}</h2>
     <h2>uAge: {{ uAge}}</h2>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { reactive, ref, computed, watch } from 'vue';
+import { reactive, ref, computed, watch, provide } from 'vue';
 import UserData from './components/UserData.vue';
 
 // import { isReactive, isRef } from 'vue'; 
@@ -54,6 +54,9 @@ export default {
         console.log("Old name: " + oldValues[1]);
         console.log("New name: " + newValues[1]);
     })
+
+    provide('userAge', uAge);
+    //the provide function takes two argument. A name of your choice and the actual value to be provided.
 
 
   // function setFirstName(event) {
